@@ -1,4 +1,4 @@
-# Palette: Image-to-Iamge Diffusion Models 
+# Palette: Image-to-Image Diffusion Models 
 
 ## Introduction 
 
