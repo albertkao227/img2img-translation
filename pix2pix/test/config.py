@@ -2,9 +2,9 @@ import torch
 import albumentations as A
 from albumentations.pytorch import ToTensorV2
 
-DEVICE = "cuda" # if torch.cuda.is_available() else "cpu"
-TRAIN_DIR = r"C:\Users\User\Documents\repos\pix2pix\pytorch-CycleGAN-and-pix2pix\datasets\maps\train"
-VAL_DIR = r"C:\Users\User\Documents\repos\pix2pix\pytorch-CycleGAN-and-pix2pix\datasets\maps\val"
+DEVICE = "cuda" 
+TRAIN_DIR = train_dir
+VAL_DIR = val_dir
 LEARNING_RATE = 2e-4
 BATCH_SIZE = 16
 NUM_WORKERS = 2
