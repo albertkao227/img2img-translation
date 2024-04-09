@@ -18,3 +18,11 @@ pix2pix architecture consists of a few major components:
 - Dataset Loading: Each item returned by DataLoader contains both the input and target images.
 
 - Training Loop: In each epoch, both the generator and discriminator are updated.
+
+
+### Reference
+
+- https://github.com/aladdinpersson/Machine-Learning-Collection
+
+- https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix 
+
