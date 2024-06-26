@@ -3,5 +3,5 @@
 image-to-image translation methods comparison
 
 - bbdm
-- pallete
+- palette
 - pix2pix 
