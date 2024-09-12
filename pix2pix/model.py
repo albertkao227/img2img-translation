@@ -1,4 +1,4 @@
-# code referenced from https://www.coursera.org/learn/apply-generative-adversarial-networks-gans 
+# code adapted from https://www.coursera.org/learn/apply-generative-adversarial-networks-gans 
 
 import torch
 from torch import nn

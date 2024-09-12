@@ -1,4 +1,4 @@
-# code referenced from https://www.coursera.org/learn/apply-generative-adversarial-networks-gans 
+# code adapted from https://www.coursera.org/learn/apply-generative-adversarial-networks-gans 
 
 import numpy as np
 import torch
@@ -52,16 +52,28 @@ def get_gen_loss(gen, disc, real, condition, adv_criterion, recon_criterion, lam
     return gen_loss
 
 
-def show_tensor_images(image_tensor, num_images=25, size=(1, 28, 28)):
+def show_tensor_images(images, num_images=25, size=(1, 28, 28)):
     '''
     Function for visualizing images: Given a tensor of images, number of images, and
     size per image, plots and prints the images in an uniform grid.
     '''
-    image_shifted = image_tensor
-    image_unflat = image_shifted.detach().cpu().view(-1, *size)
-    image_grid = make_grid(image_unflat[:num_images], nrow=5)
-    plt.figure()
-    plt.imshow(image_grid.permute(1, 2, 0).squeeze())
+    def transform_img(image_tensor, num_images, size):
+        image_shifted = image_tensor
+        image_unflat = image_shifted.detach().cpu().view(-1, *size)
+        image_grid = make_grid(image_unflat[:num_images], nrow=5)
+        return image_grid.permute(1, 2, 0).squeeze()
+    
+    condition, real, fake = images 
+    condition = transform_img(condition, num_images, size)
+    real = transform_img(real, num_images, size)
+    fake = transform_img(fake, num_images, size)
+    fig, ax = plt.subplots(3, 1, figsize=(15, 15)) 
+    ax[0].imshow(condition)
+    ax[0].set_title('Condition')
+    ax[1].imshow(real)
+    ax[1].set_title('Real')
+    ax[2].imshow(fake)
+    ax[2].set_title('Fake') 
     
 
 def train(save_model=False):
@@ -113,9 +125,9 @@ def train(save_model=False):
                 else:
                     print("Pretrained initial state")
                 if cur_step % 100 == 0:                
-                    show_tensor_images(condition, size=(input_dim, target_shape, target_shape))
-                    show_tensor_images(real, size=(real_dim, target_shape, target_shape))
-                    show_tensor_images(fake, size=(real_dim, target_shape, target_shape))
+                    show_tensor_images((condition, real, fake), size=(input_dim, target_shape, target_shape))
+                    # show_tensor_images(real, size=(real_dim, target_shape, target_shape))
+                    # show_tensor_images(fake, size=(real_dim, target_shape, target_shape))
                 mean_generator_loss = 0
                 mean_discriminator_loss = 0
                 # You can change save_model to True if you'd like to save the model
@@ -134,7 +146,7 @@ if __name__ == "__main__":
     adv_criterion = nn.BCEWithLogitsLoss() 
     recon_criterion = nn.L1Loss() 
     lambda_recon = 200
-    n_epochs = 2
+    n_epochs = 20
     input_dim = 3
     real_dim = 3
     display_step = 200
