@@ -2,6 +2,8 @@
 
 image-to-image translation methods comparison
 
-- bbdm
-- palette
-- pix2pix 
+- CUT
+- CycleGAN
+- BBDM
+- Palette
+- Pix2Pix 
